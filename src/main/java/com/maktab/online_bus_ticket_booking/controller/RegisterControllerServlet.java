@@ -54,7 +54,6 @@ public class RegisterControllerServlet extends HttpServlet {
             exception.printStackTrace();
         }finally {
         out.close();
-
         }
     }
 

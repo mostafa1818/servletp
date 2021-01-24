@@ -8,11 +8,13 @@ public class Travel {
     private Integer id;
     private String travelFrom;
     private String travelTo;
-    private LocalDate date;
-    private LocalTime time;
+    private String date;
+    private String time;
     private Integer travelId;
 
-    public Travel(Integer id, String travelFrom, String travelTo, LocalDate date, LocalTime time, Integer travelId) {
+    public Travel(){}
+
+    public Travel(Integer id, String travelFrom, String travelTo, String date, String time, Integer travelId) {
         this.id = id;
         this.travelFrom = travelFrom;
         this.travelTo = travelTo;
@@ -45,19 +47,19 @@ public class Travel {
         this.travelTo = travelTo;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
