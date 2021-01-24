@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,6 +60,7 @@ public class TravelcontrollerServlet extends HttpServlet {
                 travel.setTime(resultSet.getString("time"));
                 travel.setTravelId(resultSet.getInt("travel_id"));
                 travelList.add(travel);
+
             }
             if(travelList.size() == 0){
                 out.println("NO MATCH!");

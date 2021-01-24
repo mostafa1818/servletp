@@ -14,15 +14,18 @@
         <th>Travel From</th>
         <th>Travel To </th>
         <th>Date</th>
+        <th>Time</th>
     </tr>
 
     <c:forEach var="tempTravel" items="${travelList}">
-
         <tr>
+        <form action="TicketControllerServlet" method="post">
             <td>${tempTravel.travelFrom}</td>
             <td>${tempTravel.travelTo}</td>
             <td>${tempTravel.date}</td>
             <td>${tempTravel.time}</td>
+            <td><button type="submit" value="buy"/>Buy</td>
+        </form>
         </tr>
     </c:forEach>
 
