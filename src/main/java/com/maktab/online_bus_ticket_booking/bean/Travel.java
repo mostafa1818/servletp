@@ -1,5 +1,6 @@
 package com.maktab.online_bus_ticket_booking.bean;
 
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -8,20 +9,16 @@ public class Travel {
     private Integer id;
     private String travelFrom;
     private String travelTo;
-    private String date;
+    private String year;
+    private String month;
+    private String day;
     private String time;
+    private String date;
     private Integer travelId;
 
     public Travel(){}
 
-    public Travel(Integer id, String travelFrom, String travelTo, String date, String time, Integer travelId) {
-        this.id = id;
-        this.travelFrom = travelFrom;
-        this.travelTo = travelTo;
-        this.date = date;
-        this.time = time;
-        this.travelId = travelId;
-    }
+
 
     public Integer getId() {
         return id;
@@ -47,12 +44,28 @@ public class Travel {
         this.travelTo = travelTo;
     }
 
-    public String getDate() {
-        return date;
+    public String getYear() {
+        return year;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getTime() {
@@ -69,5 +82,13 @@ public class Travel {
 
     public void setTravelId(Integer travelId) {
         this.travelId = travelId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

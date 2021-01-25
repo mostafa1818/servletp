@@ -4,6 +4,7 @@ package com.maktab.online_bus_ticket_booking.dao;
 import com.maktab.online_bus_ticket_booking.bean.User;
 
 import javax.sql.DataSource;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class UserUtil {
 
     public List<User> getUsers() throws Exception {
 
-        List<User> students = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
 
         Connection myConn = null;
         Statement myStmt = null;
@@ -42,10 +43,10 @@ public class UserUtil {
                 String userName = myRs.getString("username");
                 String password = myRs.getString("password");
                 User tempUser = new User(id, firstName, lastName,gender,userName,password);
-                students.add(tempUser);
+                userList.add(tempUser);
             }
 
-            return students;
+            return userList;
         }
         finally {
             close(myConn, myStmt, myRs);
@@ -72,31 +73,31 @@ public class UserUtil {
         }
     }
 
-    public void addUser(User theUser) throws Exception {
+    public void addUser(User user) throws Exception {
 
-        Connection myConn = null;
-        PreparedStatement myStmt = null;
+        String name = user.getFirstName();
+        String lastname = user.getLastName();
+        String  username = user.getUsername();
+        String password = user.getPassword();
+        String gender = user.getGender();
 
-        try {
+            Connection myConn = dataSource.getConnection();
+            PreparedStatement ps= myConn .prepareStatement(
+                    "INSERT INTO user\n" +
+                            "(first_name,last_name,gender,username,password)\n" +
+                            "VALUES\n" +
+                            "(?,?,?,?,?)");
+            ps.setString(1,name);
+            ps.setString(2,lastname);
+            ps.setString(3,gender);
+            ps.setString(4,username);
+            ps.setString(5,password);
+            ps.executeUpdate();
+            myConn.close();
+            ps.close();
 
-            myConn = dataSource.getConnection();
 
-            String sql = "insert into student "
-                    + "(first_name, last_name, email) "
-                    + "values (?, ?, ?, ?, ?)";
 
-            myStmt = myConn.prepareStatement(sql);
-            myStmt.setString(1, theUser.getFirstName());
-            myStmt.setString(2, theUser.getLastName());
-            myStmt.setString(3, theUser.getGender());
-            myStmt.setString(4, theUser.getUsername());
-            myStmt.setString(5, theUser.getPassword());
-
-            myStmt.execute();
-        }
-        finally {
-            close(myConn, myStmt, null);
-        }
     }
 
     public User getUser(String theUserId) throws Exception {

@@ -32,29 +32,20 @@ public class RegisterControllerServlet extends HttpServlet {
         String password = request.getParameter("password");
         String gender = request.getParameter("gender");
 
-        try{
-
-            Connection myConn = dataSource.getConnection();
-            PreparedStatement ps= myConn .prepareStatement(
-                    "INSERT INTO user\n" +
-                            "(first_name,last_name,gender,username,password)\n" +
-                            "VALUES\n" +
-                            "(?,?,?,?,?)");
-            ps.setString(1,name);
-            ps.setString(2,lastname);
-            ps.setString(3,gender);
-            ps.setString(4,username);
-            ps.setString(5,password);
-            int i = ps.executeUpdate();
-            if(i>0)
-                out.print("You are successfully registered...");
-                myConn.close();
-                ps.close();
-        }catch (Exception exception) {
+        User user = new User();
+        user.setFirstName(name);
+        user.setLastName(lastname);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setGender(gender);
+        UserUtil userUtil = new UserUtil(dataSource);
+        try {
+            userUtil.addUser(user);
+            response.sendRedirect("login.html");
+        } catch (Exception exception) {
             exception.printStackTrace();
-        }finally {
-        out.close();
         }
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.maktab.online_bus_ticket_booking.controller;
 
 import com.maktab.online_bus_ticket_booking.bean.Travel;
+import com.maktab.online_bus_ticket_booking.dao.TravelUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -38,40 +39,30 @@ public class TravelcontrollerServlet extends HttpServlet {
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String day = request.getParameter("day");
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(year).append("-").append(month).append("-").append(day);
-        String date = stringBuilder.toString();
-        List<Travel> travelList = new ArrayList<>();
+
+        Travel travel = new Travel();
+        travel.setTravelFrom(travelFrom);
+        travel.setTravelTo(travelTo);
+        travel.setYear(year);
+        travel.setMonth(month);
+        travel.setDay(day);
+        TravelUtil travelUtil = new TravelUtil(dataSource);
         try {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from travel\n" +
-                    "where travel_from = ? and travel_to = ? and date = ? order by date ");
-            ps.setString(1,travelFrom);
-            ps.setString(2,travelTo);
-            ps.setString(3,date);
-            ResultSet resultSet = ps.executeQuery();
-
-            while (resultSet.next()){
-                Travel travel = new Travel();
-                travel.setId(resultSet.getInt("id"));
-                travel.setTravelFrom(resultSet.getString("travel_from"));
-                travel.setTravelTo(resultSet.getString("travel_to"));
-                travel.setDate(resultSet.getString("date"));
-                travel.setTime(resultSet.getString("time"));
-                travel.setTravelId(resultSet.getInt("travel_id"));
-                travelList.add(travel);
-
-            }
-            if(travelList.size() == 0){
+            List<Travel> travelList = travelUtil.searchTravel(travel);
+            if (travelList.size() == 0) {
                 out.println("NO MATCH!");
-            }else {
+            } else {
                 request.setAttribute("travelList", travelList);
                 RequestDispatcher rd = request.getRequestDispatcher("travel.jsp");
                 rd.forward(request, response);
+//                HttpSession session = request.getSession();
+//                session.setAttribute("travelIdList",travelList);
+//                RequestDispatcher dispatch = request.getRequestDispatcher("TicketControllerServlet");
+//                dispatch.forward(request,response);
             }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
+
     }
 }

@@ -4,6 +4,14 @@ public class Ticket {
 
     private User user;
     private Travel travel;
+    private Integer id;
+
+
+    public Ticket(User user, Travel travel, Integer id) {
+        this.user = user;
+        this.travel = travel;
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
@@ -20,4 +28,13 @@ public class Ticket {
     public void setTravel(Travel travel) {
         this.travel = travel;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }
