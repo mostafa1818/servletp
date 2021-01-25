@@ -28,10 +28,8 @@
             <td>${tempTravel.travelTo}</td>
             <td>${tempTravel.date}</td>
             <td>${tempTravel.time}</td>
+            <input type="hidden" name="travelId" value="${tempTravel.id}" />
             <td><button type="submit" value="buy"/>Buy</td>
-                <c:set var = "travelId" scope="application" value = "${tempTravel.travelId}"/>
-               <c:out value="travelId" />
-
         </tr>
 </table>
     </c:forEach>

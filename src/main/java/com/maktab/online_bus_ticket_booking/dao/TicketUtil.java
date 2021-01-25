@@ -19,8 +19,7 @@ public class TicketUtil {
                 "(user_id,travel_id) value (?,?)");
         ps.setInt(1,userId);
         ps.setInt(2,travelId);
-        ps.executeQuery();
-
+        ps.executeUpdate();
         ps.close();
         connection.close();
     }

@@ -28,6 +28,7 @@
             <td>${tempTravel.travelTo}</td>
             <td>${tempTravel.date}</td>
             <td>${tempTravel.time}</td>
+            <input type="hidden" name="travelId" value="${tempTravel.id}" />
             <td><button type="submit" value="buy"/>Buy</td>
         </tr>
 </table>
