@@ -1,24 +1,59 @@
-package com.maktab.online_bus_ticket_booking.bean;
+package com.maktab.online_bus_ticket_booking;
 
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
+
+import javax.persistence.*;
+
+
+//private Integer id;
+//private String travelFrom;
+//private String travelTo;
+//private String year;
+//private String month;
+//private String day;
+//private String time;
+//private String date;
+//private Integer travelId;
+
+@Entity
+@Table(name = "Travel")
 public class Travel {
-
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "travelFrom",   length = 40)
     private String travelFrom;
+
+    @Column(name = "travelTo",   length = 65)
     private String travelTo;
+
+    @Column(name = "year",   length = 80, unique = true)
     private String year;
+
+    @Column(name = "month",  length = 40)
     private String month;
+
+    @Column(name = "day",  length = 65)
     private String day;
+
+    @Column(name = "time",  length = 65)
     private String time;
+
+    @Column(name = "date",  length = 65)
     private String date;
-    private Integer travelId;
 
-    public Travel(){}
+    @Column(name = "SpecificId",  length = 65)
+    private String SpecificId;
 
+    public String getSpecificId() {
+        return SpecificId;
+    }
 
+    public void setSpecificId(String specificId) {
+        SpecificId = specificId;
+    }
 
     public Integer getId() {
         return id;
@@ -74,14 +109,6 @@ public class Travel {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public Integer getTravelId() {
-        return travelId;
-    }
-
-    public void setTravelId(Integer travelId) {
-        this.travelId = travelId;
     }
 
     public String getDate() {

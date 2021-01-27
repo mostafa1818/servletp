@@ -20,7 +20,7 @@
     </tr>
 
     <c:forEach var="tempTravel" items="${travelList}">
-        <form action="TicketServlet" method="get">
+    <form action="TicketServlet" method="get">
         <tr>
             <td>${tempTravel.travelId}</td>
             <td>${tempTravel.travelFrom}</td>
@@ -29,11 +29,12 @@
             <td>${tempTravel.time}</td>
             <td><button type="submit" name="travelId" value="${tempTravel.id}"/>Buy</td>
         </tr>
-    </c:forEach>
-        </form>
+        </c:forEach>
+    </form>
 </table>
-            <%
-                 session.setAttribute("userN",session.getAttribute("username"));
-            %>
+<%
+    session.setAttribute("userN",session.getAttribute("username"));
+%>
 </body>
 </html>
+>
